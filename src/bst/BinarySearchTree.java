@@ -173,6 +173,70 @@ public class BinarySearchTree<T extends Comparable<T>> {
 	public void inOrderStack() {
 		Stack<BSTNode<T>> in = new Stack<BSTNode<T>>();
 		
+		BSTNode<T> rightRootChild = root.rightChild;
+		
+		BSTNode<T> current = root;
+		
+		
+		while (rightRootChild != null)
+		{
+			if (current.rightChild != null)
+			{
+				in.push(current.rightChild);
+			}
+			
+			in.push(current);
+			
+			if (current.leftChild != null)
+			{
+				current = current.leftChild;
+			}
+			else
+			{
+				while (in.size() > 1)
+				{
+					System.out.println(in.pop().data);
+				}
+				
+				if (in.peek().equals(rightRootChild))
+				{
+					current = rightRootChild;
+					rightRootChild = rightRootChild.rightChild;
+				}
+				else
+				{
+					System.out.println(in.pop().data);
+					break;
+				}
+			}
+		}
+		
+		if (rightRootChild != null)
+		{
+			in.push(current);
+			
+			if (current.leftChild != null)
+			{
+				current = current.leftChild;
+			}
+			else
+			{
+				while (in.size() > 1)
+				{
+					System.out.println(in.pop().data);
+				}
+				
+				if (!in.peek().equals(rightRootChild))
+				{
+					current = rightRootChild;
+					rightRootChild = rightRootChild.rightChild;
+				}
+				else
+				{
+					System.out.println(in.pop().data);
+				}
+			}
+		}
 		
 	}
 	
